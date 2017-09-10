@@ -15,6 +15,7 @@ import java.util.ArrayList;
  */
 public class Formatting {
   
+    ArrayList<LineOfText> convertedFile;
     /**
      * @param args could be the file location for the file to run?
      */
@@ -22,11 +23,16 @@ public class Formatting {
         Formatting formatter = new Formatting();
         // The name of the file to open.
         String fileNameTemp = "C:\\Users\\chris_000\\Documents\\School\\PrinciplesofProgramming\\Formatting\\Formatting\\src\\Formatting\\test1.txt";
-        ArrayList<LineOfText> convertedFile = formatter.readInLines(fileNameTemp);
-        ArrayList<LineOfText> textHolder = new ArrayList();
-       
+        //Consider Refactoring to not need the Forratter class.
+        ErrorFinder errorFinder= new ErrorFinder(formatter.readInLines(fileNameTemp));
+        
       
     }
+    
+    
+    
+    
+    
     
     private ArrayList<LineOfText> readInLines(String fileName){
        ArrayList<LineOfText> textHolder = new ArrayList();
@@ -54,5 +60,6 @@ public class Formatting {
         }
     return textHolder;
     }
+    
     
 }

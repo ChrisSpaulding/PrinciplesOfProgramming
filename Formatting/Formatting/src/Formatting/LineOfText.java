@@ -8,14 +8,17 @@ package Formatting;
 public class LineOfText {
     private final String text; 
     private final int lineNumber;
+    public boolean error;
 
     LineOfText(){
         text="";
         lineNumber=-1;
+        error=false;
     }
     LineOfText(String text, int lineNumber){
         this.text=text;
         this.lineNumber= lineNumber;
+        error=false;
        }
     
     public String getText(){
@@ -25,5 +28,13 @@ public class LineOfText {
     public int getLineNumber(){
         return lineNumber;
     }
+    
+    public void setFalse(){
+        this.error=false;
+    }
+    public void setTrue(){
+        this.error=true;
+    }
+    
 
 }
