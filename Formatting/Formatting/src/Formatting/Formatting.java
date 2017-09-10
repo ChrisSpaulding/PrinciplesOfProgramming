@@ -4,62 +4,22 @@ for reading in a file
 */
 package Formatting;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-import java.util.ArrayList;
+
 /**
  *
  * @author chris_000
  */
 public class Formatting {
   
-    ArrayList<LineOfText> convertedFile;
     /**
      * @param args could be the file location for the file to run?
      */
     public static void main(String[] args) {
-        Formatting formatter = new Formatting();
-        // The name of the file to open.
-        String fileNameTemp = "C:\\Users\\chris_000\\Documents\\School\\PrinciplesofProgramming\\Formatting\\Formatting\\src\\Formatting\\test1.txt";
-        //Consider Refactoring to not need the Forratter class.
-        ErrorFinder errorFinder= new ErrorFinder(formatter.readInLines(fileNameTemp));
-        
-      
+       String fileNameTemp = "C:\\Users\\chris_000\\Documents\\School\\PrinciplesofProgramming\\Formatting\\Formatting\\src\\Formatting\\test1.txt";
+       ErrorFinder errorFinder= new ErrorFinder(FileConverter.readInLines(fileNameTemp));
+       errorFinder.readText();
     }
-    
-    
-    
-    
-    
-    
-    private ArrayList<LineOfText> readInLines(String fileName){
-       ArrayList<LineOfText> textHolder = new ArrayList();
-       String line = null;
-        try {
-            FileReader fileReader = new FileReader(fileName);
-            BufferedReader bufferedReader = new BufferedReader(fileReader);
-            int lineCount=0;
-            while((line = bufferedReader.readLine()) != null) {
-                lineCount++;
-                LineOfText temp = new LineOfText(line,lineCount);
-                textHolder.add(temp);
-            }
-            bufferedReader.close();         
-        }
-        catch(FileNotFoundException ex) {
-            System.out.println(
-                "Unable to open file '" + 
-                fileName + "'");                
-        }
-        catch(IOException ex) {
-            System.out.println(
-                "Error reading file '" 
-                + fileName + "'");                  
-        }
-    return textHolder;
-    }
+ 
     
     
 }
