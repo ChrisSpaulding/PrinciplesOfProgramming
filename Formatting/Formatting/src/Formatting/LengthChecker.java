@@ -10,6 +10,10 @@ public class LengthChecker {
     private boolean commentFlag;
     private final int MAXLENGTH=80;
     
+    LengthChecker(){
+        this.textToCheck= new ArrayList<LineOfText>();
+        this.commentFlag = false;
+    }
     LengthChecker(ArrayList<LineOfText> textToCheck){
         this.textToCheck=textToCheck;
         commentFlag=false;
@@ -28,6 +32,10 @@ public class LengthChecker {
        }   
        return this.textToCheck;
    }
+    
+    public void setText(ArrayList<LineOfText> text){
+        this.textToCheck=text;
+    }
     
    private boolean setCommentFlag(int line){
        if(this.textToCheck.get(line).getText().contains("/*")){

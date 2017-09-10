@@ -2,7 +2,6 @@
 package Formatting;
 
 import java.util.ArrayList;
-import java.lang.CharSequence;
 /**
  *
  * @author chris_000
@@ -10,15 +9,15 @@ import java.lang.CharSequence;
 public class ErrorFinder {
     ArrayList<LineOfText> textToCheck;
     ArrayList<String> operators;
+    
     ErrorFinder(ArrayList<LineOfText> textToCheck){
         this.textToCheck=textToCheck;
     }
     
     public ArrayList<LineOfText> findErrors(){
-        
-        LengthChecker lengthCheck= new LengthChecker(OperatorError.opperatorChecker(this.textToCheck));
+        this.textToCheck = OperatorError.opperatorChecker(this.textToCheck);
+        LengthChecker lengthCheck= new LengthChecker();
         this.textToCheck=lengthCheck.checkLength(40);
-        
         return this.textToCheck;
     }
     
