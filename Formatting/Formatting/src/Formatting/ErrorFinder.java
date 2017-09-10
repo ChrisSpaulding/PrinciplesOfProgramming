@@ -14,23 +14,33 @@ public class ErrorFinder {
         this.textToCheck=textToCheck;
     }
     
+    public ArrayList<LineOfText> findErrors(){
+        LengthChecker lengthCheck= new LengthChecker(this.textToCheck);
+        this.textToCheck=lengthCheck.checkLength(40);
+        
+        return this.textToCheck;
+    }
+    
+    
     /**Function to find and mark errors in the text stored in textToCheck
      * 
+     * @return ArrayList of LineOfText with the error boolean set
      */
-    public void opperatorChecker(){
+    public ArrayList<LineOfText> opperatorChecker(){
         for(int i=0;i<textToCheck.size();i++){
             String line=textToCheck.get(i).getText();
             if(this.findSurroundedOpperators(line)){
                 this.textToCheck.get(i).setTrue();
             }    
         }
+        return this.textToCheck;
     }
-    
-/**
- * 
- * @param line to evaluate for surrounded operators
- * @return true if there are surrounded operators
- */
+
+    /**
+     * 
+     * @param line to evaluate for surrounded operators
+     * @return true if there are surrounded operators
+     */
     private boolean findSurroundedOpperators(String line){
         for (int i=2;i<line.length();i++){
             char firstChar = line.charAt(i-2);
