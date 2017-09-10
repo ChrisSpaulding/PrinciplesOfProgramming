@@ -35,6 +35,7 @@ public class LengthChecker {
            
        }
        if(this.textToCheck.get(line).getText().contains("*/")){
+    
             this.commentFlag=false;
        }
     return this.commentFlag;   

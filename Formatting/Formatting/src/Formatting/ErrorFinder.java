@@ -15,56 +15,11 @@ public class ErrorFinder {
     }
     
     public ArrayList<LineOfText> findErrors(){
-        LengthChecker lengthCheck= new LengthChecker(this.textToCheck);
+        
+        LengthChecker lengthCheck= new LengthChecker(OperatorError.opperatorChecker(this.textToCheck));
         this.textToCheck=lengthCheck.checkLength(40);
         
         return this.textToCheck;
-    }
-    
-    
-    /**Function to find and mark errors in the text stored in textToCheck
-     * 
-     * @return ArrayList of LineOfText with the error boolean set
-     */
-    public ArrayList<LineOfText> opperatorChecker(){
-        for(int i=0;i<textToCheck.size();i++){
-            String line=textToCheck.get(i).getText();
-            if(this.findSurroundedOpperators(line)){
-                this.textToCheck.get(i).setTrue();
-            }    
-        }
-        return this.textToCheck;
-    }
-
-    /**
-     * 
-     * @param line to evaluate for surrounded operators
-     * @return true if there are surrounded operators
-     */
-    private boolean findSurroundedOpperators(String line){
-        for (int i=2;i<line.length();i++){
-            char firstChar = line.charAt(i-2);
-            char secondChar = line.charAt(i-1);
-            char thirdChar = line.charAt(i);
-            if(firstChar!=secondChar && secondChar!=thirdChar){
-                if( secondChar=='+' && ( thirdChar!=' '|| firstChar!=' ' )){
-                    return true;
-                }
-                if(secondChar=='-' && (firstChar!=' ' ||  thirdChar!=' ')){
-                    return true;
-                }
-                if(secondChar=='*' && (firstChar!=' ' ||  thirdChar!=' ')){
-                    return true;
-                }
-                if(secondChar=='/' && (firstChar!=' ' ||  thirdChar!=' ')){
-                    return true;
-                }
-                if(secondChar=='%' && (firstChar!=' ' &&  thirdChar!=' ')){
-                    return true;
-                }
-            }
-        }
-        return false;
     }
     
     public void readText(){
