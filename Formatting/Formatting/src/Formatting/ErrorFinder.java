@@ -14,7 +14,9 @@ public class ErrorFinder {
         this.textToCheck=textToCheck;
     }
     
-    
+    /**Function to find and mark errors in the text stored in textToCheck
+     * 
+     */
     public void opperatorChecker(){
         for(int i=0;i<textToCheck.size();i++){
             String line=textToCheck.get(i).getText();
@@ -24,37 +26,42 @@ public class ErrorFinder {
         }
     }
     
-
-    public boolean findSurroundedOpperators(String line){
-    for (int i=2;i<line.length();i++){
-        char firstChar = line.charAt(i-2);
-        char secondChar = line.charAt(i-1);
-        char thirdChar = line.charAt(i);
-        if(firstChar!=secondChar && secondChar!=thirdChar){
-            if( secondChar=='+' && ( thirdChar!=' '|| firstChar!=' ' )){
-                return true;
-            }
-            if(secondChar=='-' && (firstChar!=' ' ||  thirdChar!=' ')){
-                return true;
-            }
-            if(secondChar=='*' && (firstChar!=' ' ||  thirdChar!=' ')){
-                return true;
-            }
-            if(secondChar=='/' && (firstChar!=' ' ||  thirdChar!=' ')){
-                return true;
-            }
-            if(secondChar=='%' && (firstChar!=' ' &&  thirdChar!=' ')){
-                return true;
+/**
+ * 
+ * @param line to evaluate for surrounded operators
+ * @return true if there are surrounded operators
+ */
+    private boolean findSurroundedOpperators(String line){
+        for (int i=2;i<line.length();i++){
+            char firstChar = line.charAt(i-2);
+            char secondChar = line.charAt(i-1);
+            char thirdChar = line.charAt(i);
+            if(firstChar!=secondChar && secondChar!=thirdChar){
+                if( secondChar=='+' && ( thirdChar!=' '|| firstChar!=' ' )){
+                    return true;
+                }
+                if(secondChar=='-' && (firstChar!=' ' ||  thirdChar!=' ')){
+                    return true;
+                }
+                if(secondChar=='*' && (firstChar!=' ' ||  thirdChar!=' ')){
+                    return true;
+                }
+                if(secondChar=='/' && (firstChar!=' ' ||  thirdChar!=' ')){
+                    return true;
+                }
+                if(secondChar=='%' && (firstChar!=' ' &&  thirdChar!=' ')){
+                    return true;
+                }
             }
         }
+        return false;
     }
-    return false;}
     
     public void readText(){
        for(int i=0; i<this.textToCheck.size(); i++){
           System.out.println(this.textToCheck.get(i).getText()+" ::line number::"
           + this.textToCheck.get(i).getLineNumber()+ " error:: "+
-                  this.textToCheck.get(i).error);
+                  this.textToCheck.get(i).getError());
        }
     }
    

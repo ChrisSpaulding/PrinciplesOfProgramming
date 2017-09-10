@@ -8,7 +8,7 @@ package Formatting;
 public class LineOfText {
     private final String text; 
     private final int lineNumber;
-    public boolean error;
+    private boolean error;
 
     LineOfText(){
         text="";
@@ -21,12 +21,16 @@ public class LineOfText {
         error=false;
        }
     
-    public String getText(){
-        return text;
+    public boolean getError(){
+        return this.error;
     }
     
+    
     public int getLineNumber(){
-        return lineNumber;
+        return this.lineNumber;
+    }
+    public String getText(){
+        return this.text;
     }
     
     public void setFalse(){
