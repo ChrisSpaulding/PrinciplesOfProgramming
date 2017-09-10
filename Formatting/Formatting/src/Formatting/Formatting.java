@@ -17,6 +17,7 @@ public class Formatting {
     public static void main(String[] args) {
        String fileNameTemp = "C:\\Users\\chris_000\\Documents\\School\\PrinciplesofProgramming\\Formatting\\Formatting\\src\\Formatting\\test1.txt";
        ErrorFinder errorFinder= new ErrorFinder(FileConverter.readInLines(fileNameTemp));
+      errorFinder.opperatorChecker();
        errorFinder.readText();
     }
  
