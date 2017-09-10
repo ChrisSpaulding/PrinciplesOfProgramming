@@ -1,0 +1,6 @@
+;; Enforce an upper limit. 
+
+;;May have nested lists. 
+;; Assumption: the limit will be an integer
+
+;;Good tests: 5 '(6 2 kitty 5 -16), -5 '(6 2 kitty 5 -16), maxInt '(0), minInt (0), 5 '(kitty);

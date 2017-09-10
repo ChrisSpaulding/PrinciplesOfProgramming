@@ -1,0 +1,4 @@
+;;Almost sorted 5
+;;Assumptions the list contains no duplicates
+
+;; GoodTests: (), '(4), '(3 4), '(0 1 2 3 4 6 5), '(-2 1 0 2 3 4 5 ), 

@@ -1,0 +1,29 @@
+/* 
+Chris Spaulding
+methods in alphabetical order below main
+There is an error on the class, main and for
+*/
+public class Chris_Alpha
+{
+   public int add()
+   {
+   return 0; 
+   }
+   public static void main(String[] args)
+   {
+      for(int i=0;i<10;)
+      {
+           System.out.println(i);
+       }	
+   }
+ 
+   public int subtract()
+   {
+      return -1;
+   }
+   
+   private String mock()
+   {
+   return "Do better";
+   }
+}
