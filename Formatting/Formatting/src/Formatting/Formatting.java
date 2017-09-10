@@ -19,15 +19,19 @@ public class Formatting {
      * @param args could be the file location for the file to run?
      */
     public static void main(String[] args) {
+        Formatting formatter = new Formatting();
         // The name of the file to open.
-        String fileName = "C:\\Users\\chris_000\\Documents\\School\\PrinciplesofProgramming\\Formatting\\Formatting\\src\\Formatting\\test1.txt";
+        String fileNameTemp = "C:\\Users\\chris_000\\Documents\\School\\PrinciplesofProgramming\\Formatting\\Formatting\\src\\Formatting\\test1.txt";
+        ArrayList<LineOfText> convertedFile = formatter.readInLines(fileNameTemp);
+        ArrayList<LineOfText> textHolder = new ArrayList();
+       
+      
+    }
+    
+    private ArrayList<LineOfText> readInLines(String fileName){
        ArrayList<LineOfText> textHolder = new ArrayList();
-       
-       
-        // This will reference one line at a time
-        String line = null;
+       String line = null;
         try {
-            // FileReader reads text files in the default encoding.
             FileReader fileReader = new FileReader(fileName);
             BufferedReader bufferedReader = new BufferedReader(fileReader);
             int lineCount=0;
@@ -35,11 +39,7 @@ public class Formatting {
                 lineCount++;
                 LineOfText temp = new LineOfText(line,lineCount);
                 textHolder.add(temp);
-                
             }
-            
-
-            // Always close files.
             bufferedReader.close();         
         }
         catch(FileNotFoundException ex) {
@@ -51,11 +51,8 @@ public class Formatting {
             System.out.println(
                 "Error reading file '" 
                 + fileName + "'");                  
-            // Or we could just do this: 
-            // ex.printStackTrace();
         }
+    return textHolder;
     }
-    
-    
     
 }
