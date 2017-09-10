@@ -8,10 +8,15 @@ import java.util.ArrayList;
 public class LengthChecker {
     private    ArrayList<LineOfText> textToCheck;
     private boolean commentFlag;
+    private final int MAXLENGTH=80;
     
     LengthChecker(ArrayList<LineOfText> textToCheck){
         this.textToCheck=textToCheck;
         commentFlag=false;
+    }
+    
+    public ArrayList<LineOfText> checkLength(){
+        return this.checkLength(MAXLENGTH);
     }
     
     public ArrayList<LineOfText> checkLength(int maxSize){
