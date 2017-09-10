@@ -31,19 +31,19 @@ public class ErrorFinder {
         char secondChar = line.charAt(i-1);
         char thirdChar = line.charAt(i);
         if(firstChar!=secondChar && secondChar!=thirdChar){
-            if(firstChar!=' ' && secondChar=='+' && thirdChar!=' '){
+            if( secondChar=='+' && ( thirdChar!=' '|| firstChar!=' ' )){
                 return true;
             }
-            if(firstChar!=' ' && secondChar=='-' && thirdChar!=' '){
+            if(secondChar=='-' && (firstChar!=' ' ||  thirdChar!=' ')){
                 return true;
             }
-            if(firstChar!=' ' && secondChar=='*' && thirdChar!=' '){
+            if(secondChar=='*' && (firstChar!=' ' ||  thirdChar!=' ')){
                 return true;
             }
-            if(firstChar!=' ' && secondChar=='/' && thirdChar!=' '){
+            if(secondChar=='/' && (firstChar!=' ' ||  thirdChar!=' ')){
                 return true;
             }
-            if(firstChar!=' ' && secondChar=='%' && thirdChar!=' '){
+            if(secondChar=='%' && (firstChar!=' ' &&  thirdChar!=' ')){
                 return true;
             }
         }
