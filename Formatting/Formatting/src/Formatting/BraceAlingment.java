@@ -29,6 +29,9 @@ public class BraceAlingment {
         for(int i=0; i<this.textToCheck.size();i++){
             String textLine = this.textToCheck.get(i).getText();
             if(textLine.contains("{")){
+                if(i==0){
+                    this.textToCheck.get(i).setTrue();
+                }
                 this.numberOfBrackets++;
                 this.lineOfOppeningBracket.add(i);
                 this.bracketPositon.add((Integer)this.positionOfOppenBraces(textLine));
