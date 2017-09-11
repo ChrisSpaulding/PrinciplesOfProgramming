@@ -15,9 +15,8 @@ public class ErrorFinder {
     }
     
     public ArrayList<LineOfText> findErrors(){
-        this.textToCheck = OperatorError.opperatorChecker(this.textToCheck);
-        LengthChecker lengthCheck= new LengthChecker();
-        this.textToCheck=lengthCheck.checkLength(40);
+        BraceAlingment braceError = new BraceAlingment(this.textToCheck);
+        this.textToCheck=braceError.checkBraces();
         return this.textToCheck;
     }
     
