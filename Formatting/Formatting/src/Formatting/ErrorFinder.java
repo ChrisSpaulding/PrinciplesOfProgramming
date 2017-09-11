@@ -22,8 +22,8 @@ public class ErrorFinder {
     
     public void readText(){
        for(int i=0; i<this.textToCheck.size(); i++){
-          System.out.println(this.textToCheck.get(i).getText()+" ::line number::"
-          + this.textToCheck.get(i).getLineNumber()+ " error:: "+
+          System.out.println(this.textToCheck.get(i).getText()
+          +  " error:: "+
                   this.textToCheck.get(i).getError());
        }
     }

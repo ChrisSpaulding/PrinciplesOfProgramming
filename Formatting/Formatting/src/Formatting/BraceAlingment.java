@@ -17,13 +17,28 @@ public class BraceAlingment {
         this.lineOfOppeningBracket = new ArrayList<Integer>();
     }
     
+    /**
+     * 
+     * @return an ArrayList of type LineOfText with the lines error set, if only the
+     * opening bracket is set then the brackets are not lined up with the line 
+     * before.
+     * 
+     */
+    
     public ArrayList<LineOfText> checkBraces(){
         for(int i=0; i<this.textToCheck.size();i++){
             String textLine = this.textToCheck.get(i).getText();
             if(textLine.contains("{")){
                 this.numberOfBrackets++;
-                this.bracketPositon.add((Integer)this.positionOfOppenBraces(textLine));
                 this.lineOfOppeningBracket.add(i);
+                this.bracketPositon.add((Integer)this.positionOfOppenBraces(textLine));
+                if(i!=0){
+                    int pos = this.countOppeningSpaces(textToCheck.get(i-1).getText());
+                    if(pos != this.bracketPositon.get(numberOfBrackets-1)){
+                        this.textToCheck.get(i).setTrue();
+                    }
+                }
+                
             }
             if(textLine.contains("}")){
                 int closePosition= this.positionOfCloseBraces(textLine);
@@ -34,6 +49,7 @@ public class BraceAlingment {
                     this.textToCheck.get(this.lineOfOppeningBracket.get(
                             this.numberOfBrackets-1)).setTrue();
                     this.numberOfBrackets--;
+                    this.textToCheck.get(i).setTrue();
                 }
             }
         }
@@ -41,6 +57,17 @@ public class BraceAlingment {
         
         
         return this.textToCheck;
+    }
+    
+    private int countOppeningSpaces(String line){
+        int count=0;
+        int pos=0;
+        while(pos<line.length()&& (line.charAt(pos)==' '))
+        {
+            count++;
+            pos++;
+        }
+        return count;
     }
     
     private int positionOfOppenBraces(String line){
