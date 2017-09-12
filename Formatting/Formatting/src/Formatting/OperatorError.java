@@ -14,7 +14,7 @@ public class OperatorError {
         for (int i = 0; i < textToCheck.size(); i++) {
             String line = textToCheck.get(i).getText();
             if (findSurroundedOpperators(line)) {
-                textToCheck.get(i).setTrue();
+                textToCheck.get(i).setErrorFlagTrue();
             }
         }
         return textToCheck;

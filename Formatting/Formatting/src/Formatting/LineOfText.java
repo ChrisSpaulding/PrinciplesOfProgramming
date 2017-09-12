@@ -36,7 +36,7 @@ public class LineOfText {
     public void setFalse(){
         this.error=false;
     }
-    public void setTrue(){
+    public void setErrorFlagTrue(){
         this.error=true;
     }
     

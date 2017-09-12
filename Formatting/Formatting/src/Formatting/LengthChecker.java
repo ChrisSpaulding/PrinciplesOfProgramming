@@ -27,7 +27,7 @@ public class LengthChecker {
        for(int i=0;i<this.textToCheck.size();i++){
            if(this.textToCheck.get(i).getText().length()>maxSize &&
                    !this.setCommentFlag(i)){
-               this.textToCheck.get(i).setTrue();
+               this.textToCheck.get(i).setErrorFlagTrue();
            }
        }   
        return this.textToCheck;
