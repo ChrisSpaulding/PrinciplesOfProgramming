@@ -1,0 +1,15 @@
+/* 
+Chris Spaulding
+line length
+There is an error on the class, main and for
+*/
+public class Chris_LineLength
+{
+   public static void main(String[] args)
+   {
+      for(int i=0;i<10;)
+      {
+      System.out.println("i"+ "this line needs to be very long so it is now its over the legal limmit");
+      }	
+   }
+}

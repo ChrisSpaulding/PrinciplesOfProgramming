@@ -1,0 +1,27 @@
+Cover letter
+
+Error type 1: 
+Authors of test files:
+
+
+Error type 2: 
+Authors of test files:
+
+
+
+Error type 3: 
+Authors of test files:
+
+
+
+Error type 4: 
+Authors of test files:
+
+
+
+Personal error 1: 
+Authors of test files:
+
+
+Personal error 2:
+Authors of test files:

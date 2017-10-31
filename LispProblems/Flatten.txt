@@ -1,0 +1,25 @@
+;Flattens the list given no assumtions. 
+(defun Flatten(lis)
+    (cond  
+        ((null lis)
+         nil)
+        
+        ( (listp (car lis))
+         (Flatten(append (car lis) (cdr lis)))
+         )
+        
+        (t
+         (append (list(car lis))(Flatten ( cdr lis))))
+        
+     )
+        
+)
+
+
+
+(print (Flatten '(1 (2 3 (-1 -4 )4 5) (1 32 2))))
+(print (Flatten '(1 (2 3 (-1 -4 )4 5) (1 32 2))))
+(print (Flatten '(1 ()(2 3 (-1 -4 )4 5) (1 32 2))))
+(print (Flatten '(1 (((2)))(2 3 (-1 (199) -4 )4 5) (1 32 2))))
+(print (Flatten '()))
+(print (Flatten '(1 )))

@@ -1,0 +1,293 @@
+
+;Recieves a list and checks to see if it meets the expected conditions by calling on three helper functions
+;it makes no assumptions on the content in the list given
+;Test Cases are defined below: I have tested ExpreesionCheck with all tests that helper functions are tested with 
+;excet for the nil and string functions. 
+
+(defun ExpreesionCheck( lis)
+     (cond 
+              
+          ( ( and (and (threeOperands lis) (invalidOperator lis)) (Numeric lis))
+            t)
+          (t nil)
+     )
+ )
+
+
+
+;this will check a list to ensure that it has 3 operators. This function will crawl down list functions. To check all sub lists.
+;makes no assumptions
+(defun threeOperands (lis)
+     (cond 
+            ( (and (=(length lis)3) (invalidOperator lis))
+                   (cond
+                         ;both list
+                       (  (and (listp (car (cdr lis))) (listp (car (cdr (cdr lis)))))
+                        (and (threeOperands (car (cdr lis)))(threeOperands (car (cdr (cdr lis))))) )
+                       
+                       ;second term is a list but not second
+                       ( (listp (car (cdr lis)))
+                        (threeOperands (car (cdr lis))))
+                       
+                       
+                       ;third term is a list but not 2nd
+                       ( (listp (car (cdr (cdr lis))))
+                        (threeOperands (car (cdr(cdr lis)))))
+                       
+                       
+                       (t
+                        )
+                   )
+             )
+         
+         )
+)
+ 
+ ;will check the first term to be the correct string, makes no assumptions
+(defun invalidOperator (lis)
+     (cond 
+            ( (listp (car lis))
+              nil)
+            ( (equal (car lis) 'plus)
+              t 
+             )
+             ( (equal (car lis) 'minus)
+              t
+             )
+             ( (equal (car lis) 'times)
+              t
+             )
+             ( (equal (car lis) 'dividedby)
+              t
+             )
+         
+         )
+)
+
+
+;ensures that all terms are numbers or are lists for the 2nd and 3rd position
+(defun Numeric(lis)
+        
+            (cond
+                 ;true if strings where numbers should be 
+                ((findString lis)
+                   nil)
+                ;true if nil where numbers should be 
+                ( (findNil lis) nil)
+                
+                ;true if numbers are where they should be
+                 ( (and (numberp (car (cdr lis)))  (numberp (car ( cdr (cdr lis)))) )
+                  t)
+                
+                ;if both are not numbers and the mid is a number run Numeric on the 3rd term
+                ( (numberp (car (cdr lis))) 
+                 (Numeric (car ( cdr (cdr lis))))) 
+                
+                ;if the 3nd is  a number run Numeric on the 2nd
+                (  (numberp (car ( cdr (cdr lis)))) 
+                  (Numeric (car (cdr lis))))
+                
+                ;both must be list if both return true return true
+                ( (and (Numeric (car (cdr lis))) (Numeric (car (cdr (cdr lis)))))
+                  t)   
+                ;must be false
+                (nil)
+         )
+)
+
+;chechs the lis for strings in 2nd and 3rd position
+(defun findString(lis)
+     (cond
+                 
+                
+                 ( (and (numberp (car (cdr lis)))  (numberp (car ( cdr (cdr lis)))) )
+                 nil)
+                
+               ((and (numberp (car (cdr lis))) 
+                 (listp (car ( cdr (cdr lis)))))
+                                              nil ) 
+                
+                ( (and (numberp (car ( cdr (cdr lis)))) 
+                        (listp (car (cdr lis))))
+                                          nil)
+                 
+               ( (and (listp (car (cdr lis))) (listp (car (cdr (cdr lis)))))
+                  nil)   
+                (t t)   
+    )
+)
+    
+;returns true if nil is the 2nd or 3rd term
+(defun findNil(lis)
+     (cond
+               ( (equal (car (cdr lis)) nil) t)
+               ( (equal (car (cdr (cdr lis))) nil) t)
+    )
+)
+
+
+
+(print 'ThreeOperands)
+
+
+(print (threeOperands '(plus  2 2)))
+(print (threeOperands '(plus  (minus 2 1) (dividedby 2 2))))
+(print (ThreeOperands '(minus  (2 2 1) (2 2 2))))
+(print (ThreeOperands '(dividedby  (plus 2 1) 2)))
+(print (ThreeOperands '(dividedby  (plus 2 1) (minus 2 2))))
+(print (ThreeOperands '(dividedby  (plus 2 1) 2)))
+(print (ThreeOperands '(times  (plus 2 1) (plus 2 2))))
+(print (ThreeOperands '((times 2 1) 2 3)))
+(print (ThreeOperands '(minus  (2 2 1) 2)))
+(print (ThreeOperands '((minus 1 2) 2 3)))
+(print (ThreeOperands '((plus 1 2) 2 3)))
+(print (ThreeOperands '(dividedby 2 3)))
+(print '(*********************))
+
+(print (ThreeOperands '(minus  2)))
+(print (ThreeOperands '((minus 1 2)  3)))
+(print (ThreeOperands '((plus 1 2) () 3)))
+(print (ThreeOperands '(dividedby 2 ())))
+(print '(*********************))
+(print '(*********************))
+
+(print 'invalidOperator)
+
+(print (invalidOperator '(plus  2 2)))
+(print (invalidOperator '(plus  (minus 2 1) (dividedby 2 2))))
+(print (invalidOperator '(minus  (2 2 1) (2 2 2))))
+(print (invalidOperator '(dividedby  (plus 2 1) 2)))
+(print (invalidOperator '(dividedby  (plus 2 1) (minus 2 2))))
+(print (invalidOperator '(dividedby  (plus 2 1) 2)))
+(print (invalidOperator '(times  (plus 2 1) (plus 2 2))))
+(print '(*********************))
+(print (invalidOperator '((2 2 1) 2 3)))
+(print (invalidOperator '(2  (2 2 1) 2)))
+(print (invalidOperator '((3 1 2) 2 3)))
+(print (invalidOperator '((4 1 2) 2 3)))
+(print (invalidOperator '((cat) 2 3)))
+(print '(*********************))
+(print '(*********************))
+
+
+
+
+(print 'numeric)
+(print (Numeric '(plus  2 2)))
+(print (Numeric '(plus  9 2)))
+(print (Numeric '(plus  (minus 2 1) (dividedby 2 2))))
+(print (Numeric '(minus  (2 2 1) (2 2 2))))
+(print (Numeric '(dividedby  (plus 2 1) 2)))
+(print (Numeric '(dividedby  (plus 2 1) (minus 2 2))))
+(print (Numeric '(dividedby  (plus 2 1) 2)))
+(print (Numeric '(times  (plus 2 1) (plus 2 2))))
+(print '(*********************))
+(print (Numeric '((2 2 1) cat 3)))
+(print (Numeric '(2  nil 2)))
+(print (Numeric '((3 1 2) 2 bit)))
+(print (Numeric '((4 1 2) 2 plus)))
+(print (Numeric '((cat) hat bat)))
+(print '(*********************))
+(print '(*********************))
+
+(print 'findString)
+(print (findString '(cat hat mat)))
+(print (findString '((2 2 1) cat 3)))
+(print (findString '(2  bat 2)))
+(print (findString '((3 1 2) 2 bit)))
+(print (findString '((4 1 2) 2 plus)))
+(print (findString '((cat) hat bat)))
+(print '(*********************))
+(print (findString '(plus  2 2)))
+(print (findString '(plus  3 2)))
+(print (findString '(plus  (minus 2 1) (dividedby 2 2))))
+(print (findString '(minus  (plus 2 1) (minus 2 2))))
+(print (findString '(dividedby  (plus 2 1) 2)))
+(print (findString '(dividedby  (plus 2 1) (minus 2 2))))
+(print (findString '(dividedby  (plus 2 1) 2)))
+(print (findString '(times  (plus 2 1) (plus 2 2))))
+
+(print '(*********************))
+(print '(*********************))
+
+(print 'findNil)
+(print (findNil '(plus  2 nil)))
+(print (findNil '(2  nil 2)))
+(print (findNil '(dividedby  (plus 2 1) ())))
+(print '(*********************))
+(print (findNil '((2 2 1) cat 3)))
+(print (findNil '(dividedby  (plus 2 1) (minus 2 2))))
+(print (findNil '(dividedby  (plus 2 1) 2)))
+(print (findNil '(times  (plus 2 1) (plus 2 2))))
+(print (findNil '((3 1 2) 2 bit)))
+(print (findNil '((4 1 2) 2 plus)))
+(print (findNil '((cat) hat bat)))
+(print (findNil '(plus  4 2)))
+(print (findNil '(plus  (minus 2 nil) (dividedby 2 2))))
+(print (findNil '(minus  (2 2 1) (2 2 2))))
+
+
+(print '(*********************))
+(print '(*********************))(print '(*********************))
+(print '(*********************))
+(print 'ExpreesionCheck)
+
+
+(print (ExpreesionCheck '(plus  2 2)))
+(print (ExpreesionCheck '(plus  (minus 2 1) (dividedby 2 2))))
+(print (ExpreesionCheck '(minus  (2 2 1) (2 2 2))))
+(print (ExpreesionCheck '(dividedby  (plus 2 1) 2)))
+(print (ExpreesionCheck '(dividedby  (plus 2 1) (minus 2 2))))
+(print (ExpreesionCheck '(dividedby  (plus 2 1) 2)))
+(print (ExpreesionCheck '(times  (plus 2 1) (plus 2 2))))
+(print (ExpreesionCheck '((times 2 1) 2 3)))
+(print (ExpreesionCheck '(minus  (2 2 1) 2)))
+(print (ExpreesionCheck '((minus 1 2) 2 3)))
+(print (ExpreesionCheck '((plus 1 2) 2 3)))
+(print (ExpreesionCheck '(dividedby 2 3)))
+(print '(*********************))
+
+(print (ExpreesionCheck '(minus  2)))
+(print (ExpreesionCheck '((minus 1 2)  3)))
+(print (ExpreesionCheck '((plus 1 2) () 3)))
+(print (ExpreesionCheck '(dividedby 2 ())))
+(print '(*********************))
+(print '(*********************))
+
+(print 'ExpreesionCheck)
+
+(print (ExpreesionCheck '(plus  2 2)))
+(print (ExpreesionCheck '(plus  (minus 2 1) (dividedby 2 2))))
+(print (ExpreesionCheck '(minus  (2 2 1) (2 2 2))))
+(print (ExpreesionCheck '(dividedby  (plus 2 1) 2)))
+(print (ExpreesionCheck '(dividedby  (plus 2 1) (minus 2 2))))
+(print (ExpreesionCheck '(dividedby  (plus 2 1) 2)))
+(print (ExpreesionCheck '(times  (plus 2 1) (plus 2 2))))
+(print '(*********************))
+(print (ExpreesionCheck '((2 2 1) 2 3)))
+(print (ExpreesionCheck '(2  (2 2 1) 2)))
+(print (ExpreesionCheck '((3 1 2) 2 3)))
+(print (ExpreesionCheck '((4 1 2) 2 3)))
+(print (ExpreesionCheck '((cat) 2 3)))
+(print '(*********************))
+(print '(*********************))
+
+
+
+
+(print 'ExpreesionCheck)
+(print (ExpreesionCheck '(plus  2 2)))
+(print (ExpreesionCheck '(plus  9 2)))
+(print (ExpreesionCheck '(plus  (minus 2 1) (dividedby 2 2))))
+(print (ExpreesionCheck '(minus  (2 2 1) (2 2 2))))
+(print (ExpreesionCheck '(dividedby  (plus 2 1) 2)))
+(print (ExpreesionCheck '(dividedby  (plus 2 1) (minus 2 2))))
+(print (ExpreesionCheck '(dividedby  (plus 2 1) 2)))
+(print (ExpreesionCheck '(times  (plus 2 1) (plus 2 2))))
+(print '(*********************))
+(print (ExpreesionCheck '((2 2 1) cat 3)))
+(print (ExpreesionCheck '(2  nil 2)))
+(print (ExpreesionCheck '((3 1 2) 2 bit)))
+(print (ExpreesionCheck '((4 1 2) 2 plus)))
+(print (ExpreesionCheck '((cat) hat bat)))
+

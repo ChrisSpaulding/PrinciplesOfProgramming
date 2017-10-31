@@ -1,0 +1,43 @@
+;assumes that word is not null 
+(defun Recency (word lis)
+     (cond 
+         ((WordInList word lis)
+          (cons word (DeleteWord word lis)))
+         (t
+          (cons word lis))
+        
+     )
+)
+;checks to see if the word is in the list. 
+(defun WordInList( word lis)
+    (cond  
+        ((null lis)
+         nil)
+        
+        ( (equal word (car lis))
+        t)
+        
+        (t
+         (WordInList word (cdr lis)))))
+
+;this will delete a word in the list, assumes that word is not null		 
+(defun DeleteWord (word lis)
+    (cond
+        ( (equal word (car lis))
+           (cdr lis))
+        ((not (null lis))
+             (cons (car lis) (DeleteWord word (cdr lis))))))
+
+
+
+(print (Recency 'cat '(cat bat)))
+(print (Recency 'cat '(bat hat mat sat)))
+(print (Recency 'cat '(hat mat cat sat)))
+
+(print (Recency 'cat '(cat bat)))
+(print (Recency 'cat '()))
+(print (Recency 'cat '(1)))
+
+
+
+(print (Recency 'car '(a bad)))

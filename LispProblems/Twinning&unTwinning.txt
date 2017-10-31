@@ -1,0 +1,43 @@
+;Twin doubles all values in the list. Assumes that there is memory to double the list. 
+(defun Twin(lis)
+    (revlist (cond 
+        ((null lis)
+         lis)
+        ( t
+         (append (Twin( cdr lis))  (list (car lis)(car lis))) ))
+     ))
+
+;reverses the list that is given. 
+(defun revlist (lst)
+    (cond ((not (null lst))
+              (append (revlist (cdr lst)) (list (car lst)))
+          )
+    )
+)
+
+;removes all duplicates, assumes that there are no more than two of any dupulicate. (cat cat cat will remove all but one cat)
+(defun removeDup(lis)
+    (cond
+        ( (null lis)
+         lis)
+        
+        (( equal (car lis) (car (cdr lis)))  ;cond
+         (removeDup(cdr lis)));action
+        
+        ( (not (null lis))
+          (cons (car lis)( removeDup (cdr lis))))
+        ( t 
+          lis)
+     )
+)
+
+
+(print (Twin '(1 2 )))
+(print (Twin '(1 2 )))
+(print (Twin '(hat hat hat  )))
+(print (Twin '(cat dog 0 2 )))
+
+(print (removeDup (Twin '(1 2 ))))
+(print (removeDup(Twin '(1 2 ))))
+(print (removeDup(Twin '(hat hat hat)  )))
+(print (removeDup(Twin '(cat dog 0 2 ))))

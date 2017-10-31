@@ -1,0 +1,51 @@
+;assumption the list contains no nested lists
+(defun CountGroups (lis)
+    (countGroupsCounter lis 0)
+    )
+
+;removes all duplicates, assumes that there are no more than two of any dupulicate. (cat cat cat will remove all but one cat)
+(defun countGroupsCounter(lis num)
+    (cond
+        ( (null lis)
+         num)
+        
+        (( equal (car lis) (car (cdr lis)))  ;cond
+         (countGroupsCounter(removeDup lis) (+ num 1)));action
+        
+        ( (not (null lis))
+          ( countGroupsCounter (cdr lis) num))
+        ( t 
+          num)
+     )
+)
+
+;remove all immeadiate dublipactes of the first term in the list passed.
+(defun removeDup (lis)
+    (cond
+        ( (null lis)
+         lis)
+        
+        (( equal (car lis) (car (cdr lis)))  ;cond
+         (removeDup(cdr lis)));action
+          
+        ( t 
+          lis)
+     )
+    )
+
+
+(print( CountGroups '(bat -1 1 two 2 ))) 
+(print( CountGroups '(cat))) 
+(print( CountGroups '())) 
+(print( CountGroups '(1 2 3 4))) 
+
+
+(print( CountGroups '(cat cat hat cat))) 
+(print( CountGroups '(1 1 1 1))) 
+
+(print( CountGroups '(1 1 2 2))) 
+
+(print( CountGroups '(1 1 2 2 1 1)))
+
+
+

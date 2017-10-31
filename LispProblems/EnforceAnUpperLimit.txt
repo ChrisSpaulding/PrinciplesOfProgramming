@@ -1,6 +1,26 @@
-;; Enforce an upper limit. 
+.;assumes that numbers are less than max int. Assumes that data is valid. Assumes the limit is an int. 
+(defun enforce-limit( lim lis)
+    (cond  
+        ((null lis)
+         nil)
+        
+        ( (listp (car lis))
+         (cons (enforce-limit lim (car lis)) (enforce-limit lim (cdr lis))))
+        ( (>  (car lis) lim)
+          (cons lim (enforce-limit lim (cdr lis))))
+        (t
+         (cons (car lis) (enforce-limit lim (cdr lis))))
+        
+     )
+)
 
-;;May have nested lists. 
-;; Assumption: the limit will be an integer
 
-;;Good tests: 5 '(6 2 kitty 5 -16), -5 '(6 2 kitty 5 -16), maxInt '(0), minInt (0), 5 '(kitty);
+
+(print (enforce-limit '3 '((2) 3 4 (4 5 6) )))
+(print (enforce-limit '3 '((2) 3 4 (4 5 6) )))
+(print (enforce-limit '3 '((2) 3 4 (4 5 6) )))
+(print (enforce-limit '3 '((2) 3 4 (-9 3 5 -0 7) )))
+(print (enforce-limit '3 '((2) 3 4 (4 5 6) )))
+(print (enforce-limit '3 '((2) 3 4 12123123321213212)))
+(print (enforce-limit '3 '()))
+(print (enforce-limit '3 '((2) 3 4 (-9 3 (5) -0 7) )))

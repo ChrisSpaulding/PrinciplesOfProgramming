@@ -1,0 +1,27 @@
+public class Chris_Alpha
+{
+
+   public int addZ()
+   {
+   return 0; 
+   }
+
+   public static void main(String[] args)
+   {
+      for(int i=0;i<10;)
+      {
+           System.out.println(i);
+      }	
+   }
+
+   private String mock()
+   {
+   return "Do better";
+   }
+
+   public int subtract()
+   {
+      return -1;
+   }
+
+}

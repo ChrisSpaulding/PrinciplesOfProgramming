@@ -1,3 +1,0 @@
-;; Sort by recency #3
-
-;;test cases: cat '(a cat came in), dog ', cat ears); 1 (), 1 '(1).

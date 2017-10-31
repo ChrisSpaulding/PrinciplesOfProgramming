@@ -1,18 +1,16 @@
 package Formatting;
-
 /*
 assumptions: that the header is on one line and that the key word is the first line
-    Need to check {} {} lines of code that are not nested. D
+    Need to check {} {} lines of code that are not nested. 
     get an object to hold the position of the oppening bracket and other info.
 */
 import java.util.ArrayList;
-
 /**
  *
  * @author chris_000
  */
 public class BraceAlingment {
-
+    
     int numberOfBrackets;
     ArrayList<Integer> lineOfOppeningBracket;
     ArrayList<LineOfText> textToCheck;
@@ -41,18 +39,15 @@ public class BraceAlingment {
                 this.closeBracket(i, textLine);
             }
         }
-
         return this.textToCheck;
     }
 
     private int countOppeningSpaces(String line) {
-        int count = 0;
         int pos = 0;
         while (pos < line.length() && (line.charAt(pos) == ' ')) {
-            count++;
             pos++;
         }
-        return count;
+        return pos;
     }
 
     /**
@@ -66,11 +61,15 @@ public class BraceAlingment {
         int closePosition = this.positionOfCloseBraces(textLine);
         if (closePosition == this.bracketPositon.get(numberOfBrackets - 1)) {
             this.numberOfBrackets--;
+            this.bracketPositon.remove(this.bracketPositon.size()-1);
         } else {
             this.textToCheck.get(this.lineOfOppeningBracket.get(
                     this.numberOfBrackets - 1)).setErrorFlagTrue();
+            
             this.numberOfBrackets--;
+            
             this.textToCheck.get(lineNumber).setErrorFlagTrue();
+            this.bracketPositon.remove(this.bracketPositon.size()-1);
         }
     }
 
